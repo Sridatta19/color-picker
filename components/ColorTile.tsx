@@ -5,18 +5,20 @@ import { COLORS, MAPPINGS } from "../utils/constants";
 const ColorTile = ({
   color,
   setColor,
+  selectedColor,
 }: {
   color: COLORS;
+  selectedColor: COLORS;
   setColor: React.Dispatch<React.SetStateAction<COLORS>>;
 }) => {
   return (
     <motion.button
       layoutId={color}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      initial={false}
+      animate={{ ...(color !== selectedColor && { scale: 1 }), opacity: 1 }}
+      exit={{ ...(color !== selectedColor && { scale: 0.5 }), opacity: 0 }}
       transition={{
-        duration: 0.5,
+        duration: 0.25,
         ease: [0.445, 0.05, 0.55, 0.95],
       }}
       onClick={() => setColor(color)}
